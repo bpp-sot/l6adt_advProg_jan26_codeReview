@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f9f9f9;
+        }
+        h1 { color: #333; }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 350px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #feedbackList {
+            margin-top: 20px;
+        }
+        .entry {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #4CAF50;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Submit Feedback</h1>
+
+<form id="feedbackForm">
+    <input type="text" id="name" placeholder="Your Name" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="number" id="rating" placeholder="Rating (1–5)" min="1" max="5" required />
+    <textarea id="comments" placeholder="Your comments..." rows="4" required></textarea>
+    <button type="submit">Submit</button>
+</form>
+
+<h2>All Feedback</h2>
+<div id="feedbackList"></div>
+
+<script>
+    const API_BASE = window.location.origin;
+
+    document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const stuff = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            rating: Number(document.getElementById("rating").value),
+            comments: document.getElementById("comments").value
+        };
+
+        const res = await fetch(`${API_BASE}/feedback`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(stuff)
+        });
+
+        alert("Feedback submitted!");
+        document.getElementById("feedbackForm").reset();
+        
+        // ----------- load feedback
+        fetch(`${API_BASE}/feedback`)
+        .then(r => r.json())
+        .then(list => {
+            const container = document.getElementById("feedbackList");
+            container.innerHTML = "";
+            list.forEach(entry => {
+                const div = document.createElement("div");
+                div.className = "entry";
+                div.innerHTML = `
+                    <strong>${entry.name}</strong> (${entry.email})<br>
+                    Rating: ${entry.rating}<br>
+                    <em>${entry.comments}</em><br>
+                    <small>${entry.timestamp}</small>
+                `;
+                container.appendChild(div);
+            });
+        });
+        //-------------
+    });
+
+    
+        // ----------- load feedback
+        fetch(`${API_BASE}/feedback`)
+        .then(r => r.json())
+        .then(list => {
+            const container = document.getElementById("feedbackList");
+            container.innerHTML = "";
+            list.forEach(entry => {
+                const div = document.createElement("div");
+                div.className = "entry";
+                div.innerHTML = `
+                    <strong>${entry.name}</strong> (${entry.email})<br>
+                    Rating: ${entry.rating}<br>
+                    <em>${entry.comments}</em><br>
+                    <small>${entry.timestamp}</small>
+                `;
+                container.appendChild(div);
+            });
+        });
+        //-------------
+</script>
+
+</body>
+</html>
