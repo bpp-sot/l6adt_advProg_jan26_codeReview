@@ -5,7 +5,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 # GLOBALS 
-theFile = "data.json"
+theFile = "feedback.json"
 bigList = []
 
 
