@@ -8,5 +8,5 @@ The trainee has created this repository, containing an early working version of 
 
 INSTRUCTIONS TO RUN:
 - Using the green 'Code' button to the top-right, select 'Codespaces'.
-- Open a new Codespace (or click on the name of a previous Codespace).
+- Open a new Codespace via the 'Create Codespace on main' option (or click on the name of a previous Codespace).
 - Once the Codespace opens, 
