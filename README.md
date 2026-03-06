@@ -9,4 +9,8 @@ The trainee has created this repository, containing an early working version of 
 INSTRUCTIONS TO RUN:
 - Using the green 'Code' button to the top-right, select 'Codespaces'.
 - Open a new Codespace via the 'Create Codespace on main' option (or click on the name of a previous Codespace).
-- Once the Codespace opens, 
+- This repo has been set up using a virtual environment (venv), which stores the dependencies/set-up for our project.  In theory (!) this means that once the Codespace opens, Python and Flask should install and be available automatically.
+  All you need to do is open the 'app.py' file and click RUN.
+- When the Flask server app starts, you should see a pop-up and be able to click to open in your browser.
+- The app loads in a new browser window, where you can enter customer feedback data and save it.  The feedback is saved to the 'feedback.json' file.
+  
